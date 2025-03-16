@@ -10,7 +10,7 @@
 
 .form-container {
   border: 1px solid darkcyan;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   padding: 20px;
   min-width: 350px;
   overflow: hidden;
@@ -41,7 +41,7 @@
   font-size: 18px;
   font-weight: 500;
   padding: 8px 10px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   border: none;
   cursor: pointer;
   background-color: darkcyan;

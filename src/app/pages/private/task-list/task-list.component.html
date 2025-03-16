@@ -1,0 +1,24 @@
+
+
+<main class="container">
+  <!-- <div class="dashboard-container">
+    <h2>Bem-vindo ao Dashboard!</h2>
+    <button (click)="logout()">Sair</button>
+  </div> -->
+
+
+  <div class="tasks-container">
+    <ul>
+      @for(task of tasks; track task.id) {
+        <a href=''>
+          <li class="task">
+            <span>{{ task.title }}</span>
+            <span>{{ task.finished_date_limit }}</span>
+          </li>
+        </a>
+      } @empty {
+        <li>Não há tarefas</li>
+      }
+    </ul>
+  </div>
+</main>
