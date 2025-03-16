@@ -71,6 +71,19 @@ export class ApiService {
     })
     return response.data;
   }
-  
 
+  async getTaskById(id: string) {
+    try {
+      const response = await axios.get(`${this.apiUrl}/tasks/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${this.getToken()}`
+        }
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao buscar task:', error);
+      throw error;
+    }
+  }
 }
