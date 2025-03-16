@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  align-items: center;
+}
+
+h1 {
+  font-size: 1.2rem;
+  color: darkcyan;
+}
+
+.layoutContainer {
+  max-width: 760px;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  padding: 12px;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.logout {
+  width: 100px;
+  height: 35px;
+  border: 1px solid darkcyan;
+  background-color: transparent;
+  color: darkcyan;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+
+@media (min-width: 760px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .logout {
+    width: 120px;
+    height: 40px;
+  }
+
+}

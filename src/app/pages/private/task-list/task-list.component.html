@@ -1,7 +1,6 @@
 
 
 <section class="taskSection">
-  <button (click)="logout()">Logout</button>
   <div class="addTaskButtonContainer">
     <a href="/tasks/create">
       <span>
@@ -11,7 +10,9 @@
     </a>
   </div>
   @if(loading) {
-    <span class="loader loader-large loader-darkcyan"></span>
+    <div class="loadContainer">
+      <span class="loader loader-large loader-darkcyan"></span>
+    </div>
   } @else if ( tasks.length > 0) {
 
     <span class="showMessageDetails">Click para ver detalhes da tarefa*</span>
@@ -19,7 +20,7 @@
 
       <ul>
         @for(task of tasks; track task.id) {
-          <a href=''>
+          <a (click)="showTaskDetails(task.id)">
             <li class="task">
               <i class="fa-solid fa-list"></i>
               <span>{{ task.title }}</span>
@@ -41,6 +42,4 @@
       <i class="fa-solid fa-face-frown"></i>
     </div>
   }
-
-
 </section>

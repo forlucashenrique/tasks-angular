@@ -12,10 +12,14 @@ import { parseISO, setHours, setMinutes, setSeconds, format } from 'date-fns';
   styleUrl: './create-task.component.css'
 })
 export class CreateTaskComponent {
-  private ApiService = inject(ApiService);
-  private ToastService = inject(ToastService);
-  private router = inject(Router);
 
+  private ToastService = inject(ToastService);
+
+  constructor(private apiService: ApiService, private router: Router) {
+    if (!this.apiService.isUserAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
+  }
 
   loading: boolean = false;
 
@@ -24,9 +28,6 @@ export class CreateTaskComponent {
     description: '',
     finish_date_limit: ''
   }
-
-
-
 
   async onSubmit() {
 
@@ -40,7 +41,7 @@ export class CreateTaskComponent {
 
     try {
       this.loading = !this.loading
-      await this.ApiService.create_task(task_formatted);
+      await this.apiService.create_task(task_formatted);
       this.ToastService.success('Tarefa cadastrada com sucesso!', 'Sucesso!')
       this.loading = !this.loading
       this.router.navigate(['/tasks'])

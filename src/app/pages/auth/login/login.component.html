@@ -1,37 +1,42 @@
-<main>
-  <h2>Bem-vindo(a)</h2>
-  <form class="form-container">
-    <div>
-      <label class="custom-label">Email</label>
-      <input
-        class="form-input"
-        type="email"
-        name="email"
-        [(ngModel)]="user.email"
-      />
-    </div>
-    <div>
-      <label class="custom-label">Password</label>
-      <input
-        class="form-input"
-        type="text"
-        name="password"
-        [(ngModel)]="user.password"
-      />
-    </div>
-    <div class="button-container">
-      <button type="submit" (click)="onSubmit()">
-        @if(loading) {
-          <span class="loader"></span>
-        } @else {
-          Entrar
-        }
-      </button>
-    </div>
-  </form>
+<main class="containerLogin">
+  <div class="centeredContainer">
+    <h2>Bem-vindo(a)</h2>
+    <form class="form-container">
+      <div>
+        <label class="custom-label">Email</label>
+        <input
+          class="form-input"
+          type="email"
+          name="email"
+          [(ngModel)]="user.email"
+        />
+      </div>
+      <div>
+        <label class="custom-label">Password</label>
+        <input
+          class="form-input"
+          type="text"
+          name="password"
+          [(ngModel)]="user.password"
+        />
+      </div>
+      <div class="button-container">
+        <button type="submit" (click)="onSubmit()">
+          @if(loading) {
+            <span class="loader"></span>
+          } @else {
+            Entrar
+          }
+        </button>
+      </div>
 
-  <div class="askContainer">
-    <span>Ainda não tem conta?</span>
-    <a href="/register">Cadastre-se</a>
+    </form>
+    <div class="askContainer">
+      <span>Ainda não tem conta?</span>
+      <a href="/register">Cadastre-se</a>
+    </div>
   </div>
+
+
+
 </main>

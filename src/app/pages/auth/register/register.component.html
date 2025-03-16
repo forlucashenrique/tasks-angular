@@ -1,29 +1,32 @@
-<main>
-  <h2>Criar conta</h2>
-  <form class="form-container">
-    <div>
-      <label class="custom-label">Nome</label>
-      <input class="form-input" type="text" name="name" [(ngModel)]="user.name"/>
+<main class='registerContainer'>
+  <div class="centeredContainer">
+    <h2>Criar conta</h2>
+    <form class="form-container">
+      <div>
+        <label class="custom-label">Nome</label>
+        <input class="form-input" type="text" name="name" [(ngModel)]="user.name"/>
+      </div>
+      <div>
+        <label class="custom-label">Email</label>
+        <input class="form-input" type="email" name="email" [(ngModel)]="user.email"/>
+      </div>
+      <div>
+        <label class="custom-label">Password</label>
+        <input class="form-input" type="text" name="passwrod" [(ngModel)]="user.password"/>
+      </div>
+      <div class="button-container">
+        <button type="submit" (click)="onSubmit()">
+          @if(loading) {
+            <span class="loader"></span>
+          } @else {
+            Cadastrar
+          }
+        </button>
+      </div>
+    </form>
+    <div class="backContainer">
+      <a href="/login">Voltar ao Login</a>
     </div>
-    <div>
-      <label class="custom-label">Email</label>
-      <input class="form-input" type="email" name="email" [(ngModel)]="user.email"/>
-    </div>
-    <div>
-      <label class="custom-label">Password</label>
-      <input class="form-input" type="text" name="passwrod" [(ngModel)]="user.password"/>
-    </div>
-    <div class="button-container">
-      <button type="submit" (click)="onSubmit()">
-        @if(loading) {
-          <span class="loader"></span>
-        } @else {
-          Cadastrar
-        }
-      </button>
-    </div>
-  </form>
-  <div class="backContainer">
-    <a href="/login">Voltar ao Login</a>
   </div>
+
 </main>

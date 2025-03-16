@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
@@ -29,6 +29,11 @@ export class TaskListComponent {
     } catch (error) {
       console.log(error)
     }
+  }
+
+
+  showTaskDetails(id: number) {
+    this.router.navigate(['/tasks', id])
   }
 
   logout() {

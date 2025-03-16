@@ -1,4 +1,20 @@
 
+.containerLogin {
+  max-width: 760px;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+}
+
+.centeredContainer {
+  width: 100%;
+
+}
+
 h2 {
   color: darkcyan;
   text-align: center;
@@ -9,7 +25,7 @@ h2 {
   border: 1px solid darkcyan;
   /* border-radius: 10px; */
   padding: 20px;
-  min-width: 350px;
+  margin: auto;
   overflow: hidden;
 
 }
@@ -49,6 +65,8 @@ h2 {
 }
 
 .askContainer {
+  width: 100%;
+  margin: auto;
   margin-top: 24px;
   display: flex;
   gap: 8px;
@@ -90,3 +108,14 @@ h2 {
       transform: rotate(360deg);
   }
   }
+
+  @media (min-width: 760px) {
+    .form-container {
+      width: 460px;
+    }
+
+    .askContainer {
+      width: 460px;
+    }
+  }
+

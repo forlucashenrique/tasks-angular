@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-layout',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
+
+  private apiService = inject(ApiService);
+  private router = inject(Router);
+
+  logout() {
+    this.apiService.logout();
+    this.router.navigate(['/login']);
+  }
 
 }
