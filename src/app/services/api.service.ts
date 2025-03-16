@@ -17,7 +17,6 @@ export class ApiService {
     return response.data;
   }
 
-
   async login(user: User) {
 
     try {
@@ -62,6 +61,15 @@ export class ApiService {
       console.log(error)
       return false;
     }
+  }
+
+  async create_task(task: any) {
+    const response = await axios.post(`${this.apiUrl}/tasks`, task, {
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`
+      }
+    })
+    return response.data;
   }
 
 

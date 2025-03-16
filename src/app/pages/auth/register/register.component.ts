@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { User } from '../../../types/user';
 import { ApiService } from '../../../services/api.service';
 import { ToastService } from '../../../services/toast.service';
+import { Router } from '@angular/router';
 
 
 
@@ -16,7 +17,7 @@ export class RegisterComponent {
 
   private ApiService = inject(ApiService);
   private ToastService = inject(ToastService);
-
+  private router = inject(Router);
 
   loading:boolean = false;
 
@@ -33,7 +34,7 @@ export class RegisterComponent {
       await this.ApiService.register(this.user);
       this.ToastService.success('Usuário cadastrado!', 'Sucesso!')
       this.loading = !this.loading
-
+      this.router.navigate(['/login'])
     } catch(error) {
       console.log('Ocorreu um erro', error)
       this.ToastService.error('Erro ao cadastrar o usuário')

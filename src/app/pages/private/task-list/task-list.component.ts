@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class TaskListComponent {
 
   tasks: any = [];
+  loading: boolean = false
 
   constructor(private apiService: ApiService, private router: Router) {
     if (!this.apiService.isUserAuthenticated()) {
@@ -20,9 +21,11 @@ export class TaskListComponent {
 
   async ngOnInit() {
     try {
+      this.loading = !this.loading
       const tasks = await this.apiService.fetchAllTask()
-      console.log(tasks);
       this.tasks = tasks;
+      this.loading = !this.loading
+
     } catch (error) {
       console.log(error)
     }

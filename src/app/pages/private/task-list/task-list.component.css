@@ -1,11 +1,39 @@
 .tasks-container {
-  width: 100%;
+  min-width: 320px;
   max-height: 500px;
   display: flex;
   flex-direction: column;
   padding: 12px;
   /* justify-content: center; */
-  overflow-y: scroll;
+
+  overflow-y: auto;
+}
+
+.showMessageDetails {
+  font-size: 0.9rem;
+  color: darkcyan;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+
+.addTaskButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 12px;
+  margin-bottom: 2rem;
+}
+
+.addTaskButtonContainer a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  background-color: darkcyan;
+  border: none;
+  width: 120px;
+  height: 40px;
+  color: aliceblue;
 }
 
 ul {
@@ -71,4 +99,14 @@ ul {
 ul a {
   text-decoration: none;
   color: darkcyan;
+}
+
+.totalContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.totalContainer {
+  color: darkcyan;
+  font-weight: 300;
 }
