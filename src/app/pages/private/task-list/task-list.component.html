@@ -1,24 +1,32 @@
 
 
-<main class="container">
-  <!-- <div class="dashboard-container">
-    <h2>Bem-vindo ao Dashboard!</h2>
-    <button (click)="logout()">Sair</button>
-  </div> -->
+<section>
+  @if( tasks.length > 0) {
+
+    <span>Click para ver detalhes da tarefa*</span>
+    <div class="tasks-container">
+
+      <ul>
+        @for(task of tasks; track task.id) {
+          <a href=''>
+            <li class="task">
+              <i class="fa-solid fa-list"></i>
+              <span>{{ task.title }}</span>
+              <div class="deadline">
+                <i class="fa-solid fa-clock"></i>
+                <span>{{ task.finished_date_limit }}</span>
+              </div>
+            </li>
+          </a>
+        }
+      </ul>
+    </div>
+  } @else {
+    <div class="emptyContainer">
+      <span>Não há tarefas cadastradas</span>
+      <i class="fa-solid fa-face-frown"></i>
+    </div>
+  }
 
 
-  <div class="tasks-container">
-    <ul>
-      @for(task of tasks; track task.id) {
-        <a href=''>
-          <li class="task">
-            <span>{{ task.title }}</span>
-            <span>{{ task.finished_date_limit }}</span>
-          </li>
-        </a>
-      } @empty {
-        <li>Não há tarefas</li>
-      }
-    </ul>
-  </div>
-</main>
+</section>

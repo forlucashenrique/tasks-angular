@@ -11,4 +11,6 @@ import { LoginComponent } from './pages/auth/login/login.component';
 })
 export class AppComponent {
   title = 'tasks-angular';
+
+  currentYear = new Date().getFullYear();
 }
