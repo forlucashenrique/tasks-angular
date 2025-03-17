@@ -4,10 +4,11 @@ import { ApiService } from '../../../services/api.service';
 import { ToastService } from '../../../services/toast.service';
 import { Router } from '@angular/router';
 import { parseISO, setHours, setMinutes, setSeconds, format } from 'date-fns';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-task',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.css'
 })
@@ -30,6 +31,11 @@ export class CreateTaskComponent {
   }
 
   async onSubmit() {
+
+    if (!this.task.finish_date_limit) {
+      alert('Por favor, selecione uma data antes de enviar!');
+      return;
+    }
 
     const deadline_date = parseISO(this.task.finish_date_limit);
     const date_formatted = format(deadline_date, 'yyyy-MM-dd HH:mm:ss');

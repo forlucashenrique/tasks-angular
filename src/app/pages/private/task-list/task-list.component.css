@@ -19,7 +19,7 @@
 
 .addTaskButtonContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0 12px;
   margin-bottom: 2rem;
 }
@@ -76,6 +76,11 @@ ul {
   /* border-bottom: 1px solid #ccc; */
 }
 
+.task:hover {
+  background-color: darkcyan;
+  color: white;
+}
+
 .deadline {
   display: flex;
   gap: 8px;
@@ -106,6 +111,10 @@ ul a {
   text-decoration: none;
   color: darkcyan;
   cursor: pointer;
+}
+
+ul a:hover {
+  background-color: black;
 }
 
 .totalContainer {

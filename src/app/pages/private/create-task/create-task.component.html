@@ -1,17 +1,54 @@
 
 <main>
-  <form class="form-container">
+  <form #formCreateTask="ngForm" class="form-container">
     <div>
       <label class="custom-label">Título</label>
-      <input required class="form-input" type="text" name="title" [(ngModel)]="task.title"/>
+      <input
+        class="form-input"
+        type="text" name="title"
+        [(ngModel)]="task.title"
+        required
+        #inputTitle="ngModel"
+        />
+    </div>
+    <div class="error-container" *ngIf="inputTitle.invalid && inputTitle.touched">
+      <small class="error" *ngIf="inputTitle.errors?.['required']">O título é obrigatório</small>
     </div>
     <div>
       <label class="custom-label">Prazo</label>
-      <input required class="form-input" type="date" name="finished_date_limit" [(ngModel)]="task.finish_date_limit"/>
+      <input
+        class="form-input"
+        type="date"
+        name="finished_date_limit" [(ngModel)]="task.finish_date_limit"
+        required
+        min="2000-01-01"
+        max="2025-12-31"
+        #inputDeadline="ngModel"
+      />
     </div>
+    <div class="error-container" *ngIf="inputDeadline.invalid && inputDeadline.touched">
+      <small class="error" *ngIf="inputDeadline.errors?.['required']">O prazo é obrigatório</small>
+      <small class="error" *ngIf="inputDeadline.errors?.['min']">A data não pode ser anterior a 01/01/2000.</small>
+      <small class="error" *ngIf="inputDeadline.errors?.['max']">A data não pode ser posterior a 31/12/2025.</small>
+    </div>
+
+
     <div>
       <label class="custom-label">Descrição</label>
-      <textarea class="form-input customTextarea" required type="text" name="email" [(ngModel)]="task.description"></textarea>
+      <textarea
+        class="form-input customTextarea"
+        type="text"
+        name="email"
+        [(ngModel)]="task.description"
+        required
+        #inputDescription="ngModel"
+
+      >
+      </textarea>
+      <div class="error-container" *ngIf="inputDescription.invalid && inputDescription.touched">
+        <small class="error" *ngIf="inputDescription.errors?.['required']">A descrição é obrigatória</small>
+
+      </div>
     </div>
 
     <div class="button-container">
