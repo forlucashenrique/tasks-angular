@@ -4,6 +4,11 @@ h2 {
   margin-bottom: 24px;
 }
 
+.switch-container {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
 
 .form-container {
   border: 1px solid darkcyan;

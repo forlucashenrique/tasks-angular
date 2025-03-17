@@ -1,6 +1,18 @@
 
 <main>
   <form class="form-container">
+    <div class="switch-container">
+      <label class="switch">
+        <input
+          type="checkbox"
+          [(ngModel)]="task.finished"
+          name="finished"
+          (change)="onChangeStatus()"
+
+        >
+        <span class="slider round"></span>
+      </label>
+    </div>
     <div class="form-input-container">
       <label class="custom-label">Título</label>
       <input class="form-input" type="text" name="title" [(ngModel)]="task.title"/>

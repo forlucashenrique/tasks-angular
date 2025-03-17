@@ -56,7 +56,7 @@ export class TaskComponent {
           description: data.description,
           owner: data.owner,
           finish_date_limit: data.finished_date_limit,
-          finished: 0,
+          finished: data.finished ? true : false,
         }
       }
 
@@ -72,6 +72,7 @@ export class TaskComponent {
 
       const task_formatted = {
         ...this.task,
+        finished: this.task.finished ? 1 : 0,
         finish_date_limit: date_formatted
       }
 
@@ -101,6 +102,31 @@ export class TaskComponent {
       } catch (error) {
         console.log(error)
         this.toastService.error('Erro ao deletar tarefa')
+        this.loadingUpdate = !this.loadingUpdate
+      }
+    }
+
+    async onChangeStatus() {
+      console.log(this.task.finished)
+      const status = this.task.finished ? 'Finalizado' : 'Pendente'
+      try {
+        const deadline_date = parseISO(this.task.finish_date_limit);
+        const date_formatted = format(deadline_date, 'yyyy-MM-dd HH:mm:ss');
+
+        const task_formatted = {
+          ...this.task,
+          finished: this.task.finished ? 1 : 0,
+          finish_date_limit: date_formatted
+        }
+
+        this.loadingUpdate = !this.loadingUpdate
+        await this.apiService.updateTask(this.taskId, task_formatted);
+        this.toastService.success(`Status da tarefa atualizado para ${status}` ,'Sucesso!')
+        this.loadingUpdate = !this.loadingUpdate
+        this.router.navigate(['/tasks'])
+      } catch (error) {
+        console.log('Error ao atualizar status', error)
+        this.toastService.error('Erro ao atualizar o status da Tarefa')
         this.loadingUpdate = !this.loadingUpdate
       }
     }
