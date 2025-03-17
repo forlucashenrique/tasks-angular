@@ -4,12 +4,13 @@ import { User } from '../../../types/user';
 import { ApiService } from '../../../services/api.service';
 import { ToastService } from '../../../services/toast.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

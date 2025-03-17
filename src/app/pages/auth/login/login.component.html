@@ -1,7 +1,7 @@
 <main class="containerLogin">
   <div class="centeredContainer">
     <h2>Bem-vindo(a)</h2>
-    <form class="form-container">
+    <form #formLogin="ngForm"class="form-container">
       <div>
         <label class="custom-label">Email</label>
         <input
@@ -9,7 +9,14 @@
           type="email"
           name="email"
           [(ngModel)]="user.email"
+          #emailInput="ngModel"
+          required
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
         />
+      </div>
+      <div class="error-container" *ngIf="emailInput.invalid && emailInput.touched">
+        <small class="error" *ngIf="emailInput.errors?.['required']">O email é obrigatório</small>
+        <small class="error" *ngIf="emailInput.errors?.['pattern']">Formato de email inválido.</small>
       </div>
       <div>
         <label class="custom-label">Password</label>
@@ -18,7 +25,12 @@
           type="password"
           name="password"
           [(ngModel)]="user.password"
+          #passInput="ngModel"
+          required
         />
+      </div>
+      <div class="error-container" *ngIf="passInput.invalid && passInput.touched">
+        <small class="error" *ngIf="passInput.errors?.['required']">A senha é obrigatória.</small>
       </div>
       <div class="button-container">
         <button type="submit" (click)="onSubmit()">

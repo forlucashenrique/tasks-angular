@@ -1,18 +1,55 @@
 <main class='registerContainer'>
   <div class="centeredContainer">
     <h2>Criar conta</h2>
-    <form class="form-container">
+    <form #form="ngForm" class="form-container">
       <div>
         <label class="custom-label">Nome</label>
-        <input class="form-input" type="text" name="name" [(ngModel)]="user.name"/>
+        <input
+          class="form-input"
+          type="text"
+          name="name"
+          [(ngModel)]="user.name"
+          required
+          #nomeInput="ngModel"
+        />
+      </div>
+      <div class="error-container" *ngIf="nomeInput.invalid && emailInput.touched">
+        <small class="error" *ngIf="nomeInput.errors?.['required']">O nome é obrigatório</small>
       </div>
       <div>
         <label class="custom-label">Email</label>
-        <input class="form-input" type="email" name="email" [(ngModel)]="user.email"/>
+        <input
+          class="form-input"
+          type="email"
+          name="email"
+          [(ngModel)]="user.email"
+          required
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          #emailInput="ngModel"
+          />
+      </div>
+      <div class="error-container" *ngIf="emailInput.invalid && emailInput.touched">
+        <small class="error" *ngIf="emailInput.errors?.['required']">O email é obrigatório</small>
+        <small class="error" *ngIf="emailInput.errors?.['pattern']">Formato de email inválido.</small>
       </div>
       <div>
         <label class="custom-label">Password</label>
-        <input class="form-input" type="password" name="passwrod" [(ngModel)]="user.password"/>
+        <input
+          class="form-input"
+          type="password"
+          name="passwrod"
+          [(ngModel)]="user.password"
+          required
+          minlength="8"
+          #passInput="ngModel"
+          />
+          <div class="error-container" *ngIf="passInput.invalid && passInput.touched">
+            <small class="error" *ngIf="passInput.errors?.['required']">A senha é obrigatória.</small>
+            <small class="error" *ngIf="passInput.errors?.['minlength']">
+              A senha deve ter pelo menos {{ passInput.errors?.['minlength'].requiredLength }} caracteres.
+            </small>
+          </div>
+
       </div>
       <div class="button-container">
         <button type="submit" (click)="onSubmit()">
