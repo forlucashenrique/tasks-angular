@@ -10,8 +10,11 @@ import { environment } from '../../environments/environment';
 export class ApiService {
 
   private apiUrl: string = environment.API_URL;
+
+
   private appKeyToken: string = 'todoapp@authToken'
   private appUserLogged: string = 'todoapp@user'
+
 
   constructor() { }
 
@@ -21,6 +24,7 @@ export class ApiService {
   }
 
   async login(user: User) {
+    console.log(this.apiUrl)
 
     try {
       const response = await axios.post(`${this.apiUrl}/login`, user)
