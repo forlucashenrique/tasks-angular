@@ -1,6 +1,7 @@
 import { Component, signal, } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { Router, RouterModule } from '@angular/router';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-task-list',
@@ -24,7 +25,15 @@ export class TaskListComponent {
     try {
       this.loading = !this.loading
       const tasks = await this.apiService.fetchAllTask()
-      this.tasks = tasks;
+      this.tasks = tasks.map((task: any) => {
+
+        const formatted_date = parseISO(task.finished_date_limit)
+
+        return {
+          ...task,
+          finished_date_limit: format(formatted_date, 'dd/MM/yyy')
+        }
+      });
       this.loading = !this.loading
 
     } catch (error) {
@@ -40,20 +49,4 @@ export class TaskListComponent {
     this.apiService.logout();
     this.router.navigate(['/login']);
   }
-
-  // async taskFilter(event: any) {
-  //   const value = event.target.value
-  //   this.selectedValue.set(value)
-  //   const tasks = await this.apiService.fetchAllTask(this.selectedValue)
-
-  //   //this.tasks.set(tasks)
-  //   console.log(tasks)
-  //   console.log(typeof tasks)
-  //   console.log(Array.isArray(tasks))
-
-
-  //   // console.log(event.target.value)
-
-  //   // return this.tasks.filter((task:any) => task.status === value)
-  // }
 }

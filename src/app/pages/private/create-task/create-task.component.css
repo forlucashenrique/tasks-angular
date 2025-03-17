@@ -48,16 +48,28 @@ h2 {
   transition: 0.5;
 }
 
+
 .backContainer {
   display: flex;
   justify-content: center;
   margin-top: 24px;
 }
 
-.backContainer a {
+.btn-back {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 8px 10px;
+  /* border-radius: 10px; */
+  border: none;
+  cursor: pointer;
+  background-color: darkcyan;
+  color: white;
+  -webkit-transition: 0.3s;
+  border: 1px solid aliceblue;
+  transition: 0.5;
+  text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
-  color: darkcyan;
 }
 
 textarea {

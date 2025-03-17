@@ -81,6 +81,12 @@ ul {
   color: white;
 }
 
+.taskTitle {
+  white-space: nowrap;
+  overflow: hidden;         
+  text-overflow: ellipsis;
+}
+
 .deadline {
   display: flex;
   gap: 8px;

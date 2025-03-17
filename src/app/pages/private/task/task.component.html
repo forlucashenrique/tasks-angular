@@ -1,38 +1,38 @@
 
 <main>
   <form class="form-container">
-    <div>
+    <div class="form-input-container">
       <label class="custom-label">Título</label>
       <input class="form-input" type="text" name="title" [(ngModel)]="task.title"/>
     </div>
-    <div>
+    <div class="form-input-container">
       <label class="custom-label">Prazo</label>
       <input class="form-input" type="date" name="finished_date_limit" [(ngModel)]="task.finish_date_limit"/>
     </div>
-    <div>
+    <div class="form-input-container">
       <label class="custom-label">Descrição</label>
       <textarea class="form-input customTextarea" type="text" name="email" [(ngModel)]="task.description"></textarea>
     </div>
 
-    <section class="button-container">
+    <section class="buttons-container">
+      <a href="/tasks" class='btn'>Voltar</a>
+      <div class="actions-container">
+        <button class="btn btn-excluir" type="submit" (click)="onDelete()">
+          @if(loadingDelete) {
+            <span class="loader"></span>
+          } @else {
+            Excluir
+          }
+        </button>
+        <button class="btn" type="submit" (click)="onSubmit()">
+          @if(loadingUpdate) {
+            <span class="loader"></span>
+          } @else {
+            Atualizar
+          }
+        </button>
+      </div>
 
-      <button class="btn btn-excluir" type="submit" (click)="onDelete()">
-        @if(loadingDelete) {
-          <span class="loader"></span>
-        } @else {
-          Excluir
-        }
-      </button>
-      <button class="btn" type="submit" (click)="onSubmit()">
-        @if(loadingUpdate) {
-          <span class="loader"></span>
-        } @else {
-          Atualizar
-        }
-      </button>
     </section>
   </form>
-  <div class="backContainer">
-    <a href="/tasks">Voltar</a>
-  </div>
 </main>

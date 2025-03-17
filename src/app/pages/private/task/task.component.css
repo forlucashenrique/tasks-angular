@@ -13,14 +13,14 @@ h2 {
   overflow: hidden;
 }
 
-.form-container div {
+.form-input-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.form-container div:not(:nth-child(3)) {
+.form-input-container:not(:nth-child(3)) {
   margin-bottom: 10px;
 }
 
@@ -39,17 +39,27 @@ h2 {
   transition: 0.5;
 }
 
+a {
+  text-decoration: none;
+}
+
 .btn-excluir {
   background-color: darkred;
   color: white;
 }
 
-.button-container {
-  margin-top: 20px;
+.buttons-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  gap: 4px;
+  margin-top: 12px;
+}
+
+.actions-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
 }
 
 .backContainer {
