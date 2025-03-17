@@ -16,7 +16,6 @@ export class TaskComponent {
   loadingUpdate: boolean = false;
   loadingDelete: boolean = false;
 
-
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
@@ -107,7 +106,6 @@ export class TaskComponent {
     }
 
     async onChangeStatus() {
-      console.log(this.task.finished)
       const status = this.task.finished ? 'Finalizado' : 'Pendente'
       try {
         const deadline_date = parseISO(this.task.finish_date_limit);
