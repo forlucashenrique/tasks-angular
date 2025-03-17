@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-layout',
@@ -11,6 +12,7 @@ import { ApiService } from '../../services/api.service';
 export class LayoutComponent {
 
   private apiService = inject(ApiService);
+  private toastService = inject(ToastService);
   private router = inject(Router);
 
   userLogged: any
@@ -19,9 +21,16 @@ export class LayoutComponent {
     this.userLogged = this.apiService.getUserLogged()
   }
 
-  logout() {
-    this.apiService.logout();
-    this.router.navigate(['/login']);
+  async logout() {
+    try {
+      await this.apiService.logout();
+      this.router.navigate(['/login']);
+      this.toastService.success('Logout', 'Sucesso')
+
+    } catch (error) {
+      console.log(error)
+      this.toastService.error('Logout', 'Error')
+    }
   }
 
 }

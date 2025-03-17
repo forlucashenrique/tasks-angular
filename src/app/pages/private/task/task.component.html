@@ -1,50 +1,58 @@
 
 <main>
-  <form class="form-container">
-    <div class="switch-container">
-      <label class="switch">
-        <input
-          type="checkbox"
-          [(ngModel)]="task.finished"
-          name="finished"
-          (change)="onChangeStatus()"
 
-        >
-        <span class="slider round"></span>
-      </label>
-    </div>
-    <div class="form-input-container">
-      <label class="custom-label">Título</label>
-      <input class="form-input" type="text" name="title" [(ngModel)]="task.title"/>
-    </div>
-    <div class="form-input-container">
-      <label class="custom-label">Prazo</label>
-      <input class="form-input" type="date" name="finished_date_limit" [(ngModel)]="task.finish_date_limit"/>
-    </div>
-    <div class="form-input-container">
-      <label class="custom-label">Descrição</label>
-      <textarea class="form-input customTextarea" type="text" name="email" [(ngModel)]="task.description"></textarea>
-    </div>
+  @if(task.title) {
+    <form class="form-container">
+      <div class="switch-container">
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="task.finished"
+            name="finished"
+            (change)="onChangeStatus()"
 
-    <section class="buttons-container">
-      <a href="/tasks" class='btn'>Voltar</a>
-      <div class="actions-container">
-        <button class="btn btn-excluir" type="submit" (click)="onDelete()">
-          @if(loadingDelete) {
-            <span class="loader"></span>
-          } @else {
-            Excluir
-          }
-        </button>
-        <button class="btn" type="submit" (click)="onSubmit()">
-          @if(loadingUpdate) {
-            <span class="loader"></span>
-          } @else {
-            Atualizar
-          }
-        </button>
+          >
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="form-input-container">
+        <label class="custom-label">Título</label>
+        <input class="form-input" type="text" name="title" [(ngModel)]="task.title"/>
+      </div>
+      <div class="form-input-container">
+        <label class="custom-label">Prazo</label>
+        <input class="form-input" type="date" name="finished_date_limit" [(ngModel)]="task.finish_date_limit"/>
+      </div>
+      <div class="form-input-container">
+        <label class="custom-label">Descrição</label>
+        <textarea class="form-input customTextarea" type="text" name="email" [(ngModel)]="task.description"></textarea>
       </div>
 
-    </section>
-  </form>
+      <section class="buttons-container">
+        <a href="/tasks" class='btn'>Voltar</a>
+        <div class="actions-container">
+          <button class="btn btn-excluir" type="submit" (click)="onDelete()">
+            @if(loadingDelete) {
+              <span class="loader"></span>
+            } @else {
+              Excluir
+            }
+          </button>
+          <button class="btn" type="submit" (click)="onSubmit()">
+            @if(loadingUpdate) {
+              <span class="loader"></span>
+            } @else {
+              Atualizar
+            }
+          </button>
+        </div>
+
+      </section>
+    </form>
+  } @else {
+    <div class="loadContainer">
+      <span class="loader loader-large loader-darkcyan"></span>
+    </div>
+  }
+
 </main>

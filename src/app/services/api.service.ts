@@ -24,7 +24,6 @@ export class ApiService {
   }
 
   async login(user: User) {
-    console.log(this.apiUrl)
 
     try {
       const response = await axios.post(`${this.apiUrl}/login`, user)
@@ -60,7 +59,13 @@ export class ApiService {
   }
 
 
-  logout() {
+  async logout() {
+    await axios.post(`${this.apiUrl}/logout`, {}, {
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`
+      }
+    })
+
     localStorage.removeItem(this.appKeyToken);
     localStorage.removeItem(this.appUserLogged);
   }
