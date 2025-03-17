@@ -19,7 +19,7 @@
 
 .addTaskButtonContainer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 0 12px;
   margin-bottom: 2rem;
 }

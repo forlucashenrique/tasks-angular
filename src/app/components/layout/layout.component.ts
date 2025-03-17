@@ -13,6 +13,12 @@ export class LayoutComponent {
   private apiService = inject(ApiService);
   private router = inject(Router);
 
+  userLogged: any
+
+  ngOnInit( ) {
+    this.userLogged = this.apiService.getUserLogged()
+  }
+
   logout() {
     this.apiService.logout();
     this.router.navigate(['/login']);

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 import { ToastService } from '../../../services/toast.service';
 import { FormsModule } from '@angular/forms';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-task',
@@ -12,18 +13,23 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskComponent {
   taskId!: string | null;
-  loading: boolean = false;
+  loadingUpdate: boolean = false;
+  loadingDelete: boolean = false;
+
+
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
     private toastService: ToastService,
+    private router: Router,
   ) {}
 
   task:any = {
     title: '',
     description: '',
     owner: '',
-    finish_date_limit: ''
+    finish_date_limit: '',
+    finished: 0,
   }
 
   ngOnInit() {
@@ -49,11 +55,11 @@ export class TaskComponent {
           title: data.title,
           description: data.description,
           owner: data.owner,
-          finish_date_limit: data.finished_date_limit
+          finish_date_limit: data.finished_date_limit,
+          finished: 0,
         }
       }
 
-      console.log(res)
     } catch (error) {
       console.log(error)
     }
@@ -61,25 +67,42 @@ export class TaskComponent {
 
   async onSubmit() {
 
-      // const deadline_date = parseISO(this.task.finish_date_limit);
-      // const date_formatted = format(deadline_date, 'yyyy-MM-dd HH:mm:ss');
+      const deadline_date = parseISO(this.task.finish_date_limit);
+      const date_formatted = format(deadline_date, 'yyyy-MM-dd HH:mm:ss');
 
-      // const task_formatted = {
-      //   ...this.task,
-      //   finish_date_limit: date_formatted
-      // }
+      const task_formatted = {
+        ...this.task,
+        finish_date_limit: date_formatted
+      }
 
-      // try {
-      //   this.loading = !this.loading
-      //   await this.apiService.create_task(task_formatted);
-      //   this.ToastService.success('Tarefa cadastrada com sucesso!', 'Sucesso!')
-      //   this.loading = !this.loading
-      //   this.router.navigate(['/tasks'])
-      // } catch(error) {
-      //   console.log('Ocorreu um erro', error)
-      //   this.ToastService.error('Erro ao criar tarefa')
-      //   this.loading = !this.loading
-      // }
+      try {
+        this.loadingUpdate = !this.loadingUpdate
+        await this.apiService.updateTask(this.taskId, task_formatted);
+        this.toastService.success('Tarefa cadastrada com sucesso!', 'Sucesso!')
+        this.loadingUpdate = !this.loadingUpdate
+        this.router.navigate(['/tasks'])
+      } catch(error) {
+        console.log('Ocorreu um erro', error)
+        this.toastService.error('Erro ao atualizar a tarefa')
+        this.loadingUpdate = !this.loadingUpdate
+      }
+    }
+
+    async onDelete() {
+      try {
+
+        if (!confirm('Deseja realmente excluir essa tarefa?')) return
+
+        this.loadingDelete = !this.loadingDelete
+        await this.apiService.deleteTask(this.taskId);
+        this.toastService.success('Tarefa excluída com sucesso!', 'Sucesso!')
+        this.loadingDelete = !this.loadingDelete
+        this.router.navigate(['/tasks'])
+      } catch (error) {
+        console.log(error)
+        this.toastService.error('Erro ao deletar tarefa')
+        this.loadingUpdate = !this.loadingUpdate
+      }
     }
 
 }

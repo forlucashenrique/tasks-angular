@@ -11,7 +11,6 @@ h2 {
   margin: auto;
   width: 100%;
   overflow: hidden;
-
 }
 
 .form-container div {
@@ -26,15 +25,7 @@ h2 {
 }
 
 
-.button-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.button-container button {
-  width: 100%;
+.btn {
   font-size: 18px;
   font-weight: 500;
   padding: 8px 10px;
@@ -46,6 +37,19 @@ h2 {
   -webkit-transition: 0.3s;
   border: 1px solid aliceblue;
   transition: 0.5;
+}
+
+.btn-excluir {
+  background-color: darkred;
+  color: white;
+}
+
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
 }
 
 .backContainer {

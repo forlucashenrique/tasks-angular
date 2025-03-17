@@ -14,15 +14,23 @@
       <textarea class="form-input customTextarea" type="text" name="email" [(ngModel)]="task.description"></textarea>
     </div>
 
-    <div class="button-container">
-      <button type="submit" (click)="onSubmit()">
-        @if(loading) {
+    <section class="button-container">
+
+      <button class="btn btn-excluir" type="submit" (click)="onDelete()">
+        @if(loadingDelete) {
+          <span class="loader"></span>
+        } @else {
+          Excluir
+        }
+      </button>
+      <button class="btn" type="submit" (click)="onSubmit()">
+        @if(loadingUpdate) {
           <span class="loader"></span>
         } @else {
           Atualizar
         }
       </button>
-    </div>
+    </section>
   </form>
   <div class="backContainer">
     <a href="/tasks">Voltar</a>

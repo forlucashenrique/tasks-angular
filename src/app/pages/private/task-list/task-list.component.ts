@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { Router, RouterModule } from '@angular/router';
 
@@ -10,8 +10,9 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class TaskListComponent {
 
-  tasks: any = [];
+  tasks: any[] = []
   loading: boolean = false
+  selectedValue = signal('')
 
   constructor(private apiService: ApiService, private router: Router) {
     if (!this.apiService.isUserAuthenticated()) {
@@ -31,7 +32,6 @@ export class TaskListComponent {
     }
   }
 
-
   showTaskDetails(id: number) {
     this.router.navigate(['/tasks', id])
   }
@@ -40,4 +40,20 @@ export class TaskListComponent {
     this.apiService.logout();
     this.router.navigate(['/login']);
   }
+
+  // async taskFilter(event: any) {
+  //   const value = event.target.value
+  //   this.selectedValue.set(value)
+  //   const tasks = await this.apiService.fetchAllTask(this.selectedValue)
+
+  //   //this.tasks.set(tasks)
+  //   console.log(tasks)
+  //   console.log(typeof tasks)
+  //   console.log(Array.isArray(tasks))
+
+
+  //   // console.log(event.target.value)
+
+  //   // return this.tasks.filter((task:any) => task.status === value)
+  // }
 }

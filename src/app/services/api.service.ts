@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, WritableSignal } from '@angular/core';
 import { User } from '../types/user';
 import axios from 'axios';
 
@@ -9,6 +9,7 @@ export class ApiService {
 
   private apiUrl: string = 'http://localhost:3000/api/v1'
   private appKeyToken: string = 'todoapp@authToken'
+  private appUserLogged: string = 'todoapp@user'
 
   constructor() { }
 
@@ -22,9 +23,11 @@ export class ApiService {
     try {
       const response = await axios.post(`${this.apiUrl}/login`, user)
       const token = response.data.data.token;
+      const userLogged = response.data.data.user;
 
       if (token) {
         localStorage.setItem(this.appKeyToken, token)
+        localStorage.setItem(this.appUserLogged, JSON.stringify(userLogged))
         return true;
       }
 
@@ -44,12 +47,33 @@ export class ApiService {
     return localStorage.getItem(this.appKeyToken);
   }
 
-  logout() {
-    localStorage.removeItem(this.appKeyToken);
+  getUserLogged() {
+
+    const user = localStorage.getItem(this.appUserLogged)
+    return JSON.parse(user!)
   }
 
-  async fetchAllTask() {
+
+  logout() {
+    localStorage.removeItem(this.appKeyToken);
+    localStorage.removeItem(this.appUserLogged);
+  }
+
+  async fetchAllTask(query?: WritableSignal<string>) {
     try {
+
+      // let response: any;
+
+      // if (query) {
+      //   response = await axios.get(`${this.apiUrl}/tasks?status=${query}`, {
+      //     headers: {
+      //       'Authorization': `Bearer ${this.getToken()}`
+      //     }
+      //   })
+
+      //   return response.data.data
+      // }
+
       const response = await axios.get(`${this.apiUrl}/tasks`, {
         headers: {
           'Authorization': `Bearer ${this.getToken()}`
@@ -58,8 +82,9 @@ export class ApiService {
 
       return response.data.data
     } catch (error) {
+
       console.log(error)
-      return false;
+      return false
     }
   }
 
@@ -83,6 +108,34 @@ export class ApiService {
       return response.data;
     } catch (error) {
       console.error('Erro ao buscar task:', error);
+      throw error;
+    }
+  }
+
+  async updateTask(id: string | null, task: any) {
+    try {
+      const response = await axios.put(`${this.apiUrl}/tasks/${id}`, task, {
+        headers: {
+          'Authorization': `Bearer ${this.getToken()}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao atualizar produto:', error);
+      throw error;
+    }
+  }
+
+  async deleteTask(id: string | null) {
+    try {
+      await axios.delete(`${this.apiUrl}/tasks/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${this.getToken()}`
+        }
+      });
+
+    } catch (error) {
+      console.error('Erro ao atualizar produto:', error);
       throw error;
     }
   }

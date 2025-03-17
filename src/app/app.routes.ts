@@ -15,8 +15,8 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: TaskListComponent },
-      { path: ':id', component: TaskComponent },
       { path: 'create', component: CreateTaskComponent },
+      { path: ':id', component: TaskComponent },
     ]
   },
 ];
