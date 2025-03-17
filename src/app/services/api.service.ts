@@ -1,13 +1,15 @@
 import { inject, Injectable, WritableSignal } from '@angular/core';
 import { User } from '../types/user';
 import axios from 'axios';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private apiUrl: string = 'http://localhost:3000/api/v1'
+  private apiUrl: string = environment.API_URL;
   private appKeyToken: string = 'todoapp@authToken'
   private appUserLogged: string = 'todoapp@user'
 

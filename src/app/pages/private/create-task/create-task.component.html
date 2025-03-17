@@ -3,15 +3,15 @@
   <form class="form-container">
     <div>
       <label class="custom-label">Título</label>
-      <input class="form-input" type="text" name="title" [(ngModel)]="task.title"/>
+      <input required class="form-input" type="text" name="title" [(ngModel)]="task.title"/>
     </div>
     <div>
       <label class="custom-label">Prazo</label>
-      <input class="form-input" type="date" name="finished_date_limit" [(ngModel)]="task.finish_date_limit"/>
+      <input required class="form-input" type="date" name="finished_date_limit" [(ngModel)]="task.finish_date_limit"/>
     </div>
     <div>
       <label class="custom-label">Descrição</label>
-      <textarea class="form-input customTextarea" type="text" name="email" [(ngModel)]="task.description"></textarea>
+      <textarea class="form-input customTextarea" required type="text" name="email" [(ngModel)]="task.description"></textarea>
     </div>
 
     <div class="button-container">
